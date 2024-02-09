@@ -1,0 +1,30 @@
+<!-- frontend/src/app/upload/upload.component.html -->
+<div class="upload-container">
+  <h2 class="upload-title">Flower Recognition App</h2>
+  <p class="upload-description">
+    Upload an image that contains flower to get details about the flower.
+  </p>
+
+  <label for="fileInput" class="custom-file-upload">
+    <input type="file" id="fileInput" (change)="onFileChanged($event)" />
+    <i class="fas fa-cloud-upload-alt"></i> Upload Image
+  </label>
+
+  <div class="image-upload-box">
+    <div *ngIf="uploadedImage" class="uploaded-image">
+      <img [src]="uploadedImage" alt="Uploaded Flower" />
+    </div>
+    <div *ngIf="!uploadedImage" class="upload-placeholder">
+      <p>Upload Image Here</p>
+    </div>
+  </div>
+
+  <div *ngIf="flowerDetails" class="flower-details">
+    <h3>Flower Details</h3>
+    <p>Name: {{ flowerDetails.flower_name }}</p>
+    <p>Description: {{ flowerDetails.description }}</p>
+    <p>Confidence: {{ flowerDetails.confidence | percent: '1.2-2' }}</p>
+  </div>
+
+  <button *ngIf="uploadedImage" (click)="onUpload()" class="submit-button">Recognize Flower</button>
+</div>
